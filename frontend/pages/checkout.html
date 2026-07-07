@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Checkout</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<h1>💳 Checkout</h1>
+
+<input
+type="text"
+id="customer"
+placeholder="Enter Customer Name">
+
+<br><br>
+
+<button onclick="placeOrder()">
+Place Order
+</button>
+
+<script>
+
+const API = "http://localhost:5000";
+
+function placeOrder(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart.length===0){
+
+alert("Cart is empty");
+
+return;
+
+}
+
+let customer=document.getElementById("customer").value;
+
+let items=cart.map(item=>item.name);
+
+let total=cart.reduce((sum,item)=>sum+item.price,0);
+
+fetch(API+"/order",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+customerName:customer,
+
+items:items,
+
+total:total
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+alert(data.message);
+
+localStorage.removeItem("cart");
+
+window.location.href="orders.html";
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

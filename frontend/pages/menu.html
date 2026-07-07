@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Food Menu</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <a href="index.html">Home</a> |
+
+        <a href="menu.html">Menu</a> |
+
+        <a href="cart.html">Cart</a> |
+
+        <a href="orders.html">Orders</a> |
+
+        <a href="profile.html">Profile</a>
+
+    </nav>
+
+    <hr>
+
+    <h1>🍔 Food Menu</h1>
+
+    <button onclick="logout()">
+
+        Logout
+
+    </button>
+
+    <br><br>
+
+    <div id="menu"></div>
+
+<script>
+
+// ==========================
+// Login Protection
+// ==========================
+
+if (!localStorage.getItem("user")) {
+
+    alert("Please login first.");
+
+    window.location.href = "login.html";
+
+}
+
+const API = "http://localhost:5000";
+
+// ==========================
+// Logout
+// ==========================
+
+function logout() {
+
+    localStorage.removeItem("user");
+
+    localStorage.removeItem("cart");
+
+    alert("Logged Out Successfully");
+
+    window.location.href = "login.html";
+
+}
+
+// ==========================
+// Load Menu
+// ==========================
+
+fetch(API + "/menu")
+
+.then(response => response.json())
+
+.then(data => {
+
+    let menu = document.getElementById("menu");
+
+    data.forEach(food => {
+
+        let image = "";
+
+        switch(food.name){
+
+            case "Chicken Biryani":
+                image = "../images/biryani.jpg";
+                break;
+
+            case "Veg Fried Rice":
+                image = "../images/friedrice.jpg";
+                break;
+
+            case "Paneer Butter Masala":
+                image = "../images/paneer.jpg";
+                break;
+
+            case "Pizza":
+                image = "../images/pizza.jpg";
+                break;
+
+            case "Burger":
+                image = "../images/burger.jpg";
+                break;
+
+            case "French Fries":
+                image = "../images/fries.jpg";
+                break;
+
+            default:
+                image = "../images/pizza.jpg";
+
+        }
+
+        menu.innerHTML += `
+
+        <div class="card">
+
+            <img src="${image}" alt="${food.name}">
+
+            <h2>${food.name}</h2>
+
+            <p>${food.category}</p>
+
+            <h3>₹${food.price}</h3>
+
+            <button onclick="addToCart('${food.name}','${food.category}',${food.price})">
+
+                Add To Cart
+
+            </button>
+
+        </div>
+
+        <br>
+
+        `;
+
+    });
+
+});
+
+// ==========================
+// Add To Cart
+// ==========================
+
+function addToCart(name, category, price){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({
+
+        name: name,
+        category: category,
+        price: price
+
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " added to cart!");
+
+}
+
+</script>
+
+</body>
+
+</html>

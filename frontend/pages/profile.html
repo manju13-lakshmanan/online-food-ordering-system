@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <a href="index.html">Home</a> |
+
+        <a href="menu.html">Menu</a> |
+
+        <a href="cart.html">Cart</a> |
+
+        <a href="orders.html">Orders</a> |
+
+        <a href="profile.html">Profile</a>
+
+    </nav>
+
+    <hr>
+
+    <h1>👤 My Profile</h1>
+
+    <div class="card">
+
+        <h2>Welcome</h2>
+
+        <h3 id="username"></h3>
+
+        <p>Email:</p>
+
+        <h3 id="email"></h3>
+
+        <br>
+
+        <button onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+<script>
+
+// =========================
+// Login Protection
+// =========================
+
+if(!localStorage.getItem("user")){
+
+    alert("Please Login First");
+
+    window.location.href="login.html";
+
+}
+
+// =========================
+// Display User
+// =========================
+
+let email = localStorage.getItem("user");
+
+document.getElementById("email").innerHTML = email;
+
+// Display username from email
+
+let username = email.split("@")[0];
+
+document.getElementById("username").innerHTML = username;
+
+// =========================
+// Logout
+// =========================
+
+function logout(){
+
+    localStorage.removeItem("user");
+
+    localStorage.removeItem("cart");
+
+    alert("Logged Out Successfully");
+
+    window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

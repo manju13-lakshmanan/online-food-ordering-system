@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+
+    </nav>
+
+    <h1>🔐 Login</h1>
+
+    <div class="card">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email"
+        >
+
+        <br><br>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+        >
+
+        <br><br>
+
+        <button onclick="login()">
+            Login
+        </button>
+
+        <br><br>
+
+        <a href="register.html">
+            Create New Account
+        </a>
+
+    </div>
+
+    <script>
+
+        const API = "http://localhost:5000";
+
+        function login() {
+
+            const user = {
+
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+
+            };
+
+            fetch(API + "/login", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify(user)
+
+            })
+
+            .then(res => res.json())
+
+            .then(data => {
+
+                if (data.success) {
+
+                    alert(data.message);
+
+                    localStorage.setItem("user", user.email);
+
+                    window.location.href = "menu.html";
+
+                } else {
+
+                    alert(data.message);
+
+                }
+
+            })
+
+            .catch(err => {
+
+                console.log(err);
+
+                alert("Server Error");
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

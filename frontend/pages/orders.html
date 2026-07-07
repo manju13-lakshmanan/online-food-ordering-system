@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Orders</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<h1>📦 Orders</h1>
+
+<div id="orders"></div>
+
+<script>
+
+fetch("http://localhost:5000/orders")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let html="";
+
+data.forEach(order=>{
+
+html+=`
+
+<div class="card">
+
+<h2>${order.customerName}</h2>
+
+<p>${order.items.join(", ")}</p>
+
+<h3>Total ₹${order.total}</h3>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("orders").innerHTML=html;
+
+});
+
+</script>
+
+</body>
+
+</html>

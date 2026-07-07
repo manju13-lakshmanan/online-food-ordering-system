@@ -1,0 +1,197 @@
+/* ===========================
+   General Page
+=========================== */
+
+body{
+
+    font-family: Arial, sans-serif;
+
+    background:#f4f4f4;
+
+    margin:0;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+/* ===========================
+   Navigation Bar
+=========================== */
+
+nav{
+
+    background:#ff5722;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+}
+
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    margin:15px;
+
+    font-weight:bold;
+
+}
+
+nav a:hover{
+
+    color:yellow;
+
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+h1{
+
+    color:#333;
+
+}
+
+h2{
+
+    color:#444;
+
+}
+
+h3{
+
+    color:#ff5722;
+
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card{
+
+    width:350px;
+
+    margin:20px auto;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+input{
+
+    width:300px;
+
+    padding:10px;
+
+    margin:10px;
+
+    font-size:16px;
+
+    border:1px solid #ccc;
+
+    border-radius:5px;
+
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+button{
+
+    background:#ff5722;
+
+    color:white;
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+button:hover{
+
+    background:#e64a19;
+
+}
+
+/* ===========================
+   Links
+=========================== */
+
+a{
+
+    text-decoration:none;
+
+    color:blue;
+
+}
+
+a:hover{
+
+    color:red;
+
+}
+
+/* ===========================
+   Horizontal Line
+=========================== */
+
+hr{
+
+    margin:20px 0;
+
+}
+
+/* ===========================
+   Responsive Design
+=========================== */
+
+@media screen and (max-width:600px){
+
+    .card{
+
+        width:90%;
+
+    }
+
+    input{
+
+        width:90%;
+
+    }
+
+    nav a{
+
+        display:block;
+
+        margin:10px 0;
+
+    }
+
+}
