@@ -1,47 +1,34 @@
-# Online Food Ordering System
+# 🍔 Online Food Ordering System
 
-A cloud-based food ordering application built with:
+A full-stack online food ordering application developed with a frontend, Node.js backend, MongoDB database, and Docker deployment.
 
 ## 🚀 Tech Stack
 
-- Flask
-- MySQL
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- Nginx
+
+### Backend
+- Node.js
+- Express.js
+- REST API
+
+### Database
+- MongoDB Atlas
+
+### DevOps
 - Docker
-- Jenkins
-- Terraform
-- AWS
+- Docker Images
+- Docker Containers
+- GitHub
 
 ## 📌 Project Objective
 
-This project demonstrates a complete DevOps workflow by building and deploying an online food ordering system. It includes backend development, containerization, CI/CD, infrastructure automation, cloud deployment, and monitoring.
+This project demonstrates a complete full-stack application deployment using Docker containers.
+
+Users can register, login, view food menus, place orders, and manage orders through a web interface.
 
 ## 📂 Project Structure
 
-```
-online-food-ordering/
-├── backend/
-├── frontend/
-├── database/
-├── terraform/
-├── jenkins/
-├── docs/
-├── docker-compose.yml
-└── README.md
-```
-
-## 🛠 Features
-
-- View Food Menu
-- Add Food Items
-- Place Orders
-- View Order History
-- Dockerized Application
-- Jenkins CI/CD Pipeline
-- Terraform Infrastructure
-- AWS EC2 Deployment
-- S3 Image Storage
-- CloudWatch Monitoring
-
-## 👨‍💻 Author
-
-"Manjavika"
