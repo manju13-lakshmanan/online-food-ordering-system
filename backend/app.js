@@ -15,7 +15,7 @@ app.use(express.json());
 // MongoDB Connection
 // =======================
 
-mongoose.connect("mongodb://host.docker.internal:27017/foodieshub")
+mongoose.connect("mongodb://127.0.0.1:27017/foodieshub")
 .then(() => {
     console.log("✅ MongoDB Connected");
 })

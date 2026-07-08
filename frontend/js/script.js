@@ -1,4 +1,4 @@
-const API = "http://localhost:5000";
+const API = "http://localhost:5001";
 
 // Load menu from backend
 fetch(API + "/menu")

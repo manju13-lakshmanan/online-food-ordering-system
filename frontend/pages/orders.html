@@ -1,53 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Orders</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orders</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
 <body>
 
-<h1>📦 Orders</h1>
+    <h1>📦 Orders</h1>
 
-<div id="orders"></div>
+    <div id="orders"></div>
 
-<script>
+    <br>
 
-fetch("http://localhost:5000/orders")
+    <button onclick="window.location.href='menu.html'">
 
-.then(res=>res.json())
+        ← Back to Menu
 
-.then(data=>{
+    </button>
 
-let html="";
+    <script>
 
-data.forEach(order=>{
+        // Local Backend
+        const API = "http://localhost:5001";
 
-html+=`
+        // For EC2 later
+        // const API = "http://65.2.190.84:5001";
 
-<div class="card">
+        fetch(API + "/orders")
 
-<h2>${order.customerName}</h2>
+            .then(response => response.json())
 
-<p>${order.items.join(", ")}</p>
+            .then(data => {
 
-<h3>Total ₹${order.total}</h3>
+                let html = "";
 
-</div>
+                if (data.length === 0) {
 
-`;
+                    html = "<h2>No Orders Found</h2>";
 
-});
+                } else {
 
-document.getElementById("orders").innerHTML=html;
+                    data.forEach(order => {
 
-});
+                        html += `
+                        <div class="card">
 
-</script>
+                            <h2>${order.customerName}</h2>
+
+                            <p><strong>Items:</strong> ${order.items.join(", ")}</p>
+
+                            <h3>Total ₹${order.total}</h3>
+
+                            <small>${new Date(order.createdAt).toLocaleString()}</small>
+
+                        </div>
+
+                        <br>
+                        `;
+
+                    });
+
+                }
+
+                document.getElementById("orders").innerHTML = html;
+
+            })
+
+            .catch(error => {
+
+                console.log(error);
+
+                document.getElementById("orders").innerHTML =
+                "<h2>❌ Unable to fetch orders.</h2>";
+
+            });
+
+    </script>
 
 </body>
 

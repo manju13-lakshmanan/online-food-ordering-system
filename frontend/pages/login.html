@@ -55,16 +55,27 @@
 
     <script>
 
-        const API = "http://localhost:5000";
+        // Local Backend
+        const API = "http://localhost:5001";
+
+        // For EC2 Deployment Later
+        // const API = "http://65.2.190.84:5001";
 
         function login() {
 
             const user = {
 
-                email: document.getElementById("email").value,
-                password: document.getElementById("password").value
+                email: document.getElementById("email").value.trim(),
+                password: document.getElementById("password").value.trim()
 
             };
+
+            if (!user.email || !user.password) {
+
+                alert("Please enter Email and Password");
+                return;
+
+            }
 
             fetch(API + "/login", {
 
@@ -80,29 +91,25 @@
 
             })
 
-            .then(res => res.json())
+            .then(response => response.json())
 
             .then(data => {
 
+                alert(data.message);
+
                 if (data.success) {
 
-                    alert(data.message);
-
-                    localStorage.setItem("user", user.email);
+                    localStorage.setItem("userEmail", user.email);
 
                     window.location.href = "menu.html";
-
-                } else {
-
-                    alert(data.message);
 
                 }
 
             })
 
-            .catch(err => {
+            .catch(error => {
 
-                console.log(err);
+                console.error(error);
 
                 alert("Server Error");
 

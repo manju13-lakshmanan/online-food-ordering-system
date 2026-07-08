@@ -1,88 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Checkout</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
 <body>
 
-<h1>💳 Checkout</h1>
+    <h1>💳 Checkout</h1>
 
-<input
-type="text"
-id="customer"
-placeholder="Enter Customer Name">
+    <input
+        type="text"
+        id="customer"
+        placeholder="Enter Customer Name">
 
-<br><br>
+    <br><br>
 
-<button onclick="placeOrder()">
-Place Order
-</button>
+    <button onclick="placeOrder()">
+        Place Order
+    </button>
 
-<script>
+    <script>
 
-const API = "http://localhost:5000";
+        // Local Backend
+        const API = "http://localhost:5001";
 
-function placeOrder(){
+        // For EC2 later
+        // const API = "http://65.2.190.84:5001";
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        function placeOrder() {
 
-if(cart.length===0){
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-alert("Cart is empty");
+            if (cart.length === 0) {
 
-return;
+                alert("Your cart is empty!");
+                return;
 
-}
+            }
 
-let customer=document.getElementById("customer").value;
+            let customer = document.getElementById("customer").value.trim();
 
-let items=cart.map(item=>item.name);
+            if (customer === "") {
 
-let total=cart.reduce((sum,item)=>sum+item.price,0);
+                alert("Please enter Customer Name");
+                return;
 
-fetch(API+"/order",{
+            }
 
-method:"POST",
+            let items = cart.map(item => item.name);
 
-headers:{
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
 
-"Content-Type":"application/json"
+            fetch(API + "/order", {
 
-},
+                method: "POST",
 
-body:JSON.stringify({
+                headers: {
 
-customerName:customer,
+                    "Content-Type": "application/json"
 
-items:items,
+                },
 
-total:total
+                body: JSON.stringify({
 
-})
+                    customerName: customer,
+                    items: items,
+                    total: total
 
-})
+                })
 
-.then(res=>res.json())
+            })
 
-.then(data=>{
+            .then(res => res.json())
 
-alert(data.message);
+            .then(data => {
 
-localStorage.removeItem("cart");
+                alert(data.message);
 
-window.location.href="orders.html";
+                localStorage.removeItem("cart");
 
-});
+                window.location.href = "orders.html";
 
-}
+            })
 
-</script>
+            .catch(err => {
+
+                console.log(err);
+
+                alert("Order Failed");
+
+            });
+
+        }
+
+    </script>
 
 </body>
 
